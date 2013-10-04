@@ -2,17 +2,18 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Gifutu2" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Gifutu" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Gifutu2" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
+  <%= render 'layouts/navigation' %>
   <body class="<%= controller_name %> <%= action_name %>">
     <div id="container" class="container">
       <header>
-        <%= render 'layouts/navigation' %>
+        
         <%= render 'layouts/messages' %>
       </header>
       <div id="main" role="main">
