@@ -12,6 +12,12 @@ $btn-default-border: #22A86C;
 $font-family-base: 'Raleway', sans-serif;
 $navbar-inverse-bg: #546071;
 $navbar-inverse-brand-color: #FDFEFF;
+$body-bg: #222;
+$text-color: #7d7d7d;
 
 // import original bootstrap
 @import "twitter/bootstrap";
+
+h1, h2, h3{
+	color: #d6d6d6;
+}
