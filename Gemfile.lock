@@ -248,6 +248,7 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   guard-rspec
+  httparty
   hub
   jbuilder (~> 1.2)
   jquery-rails
