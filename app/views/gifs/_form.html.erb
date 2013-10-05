@@ -1,0 +1,15 @@
+<%= simple_form_for(@gif) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :caption %>
+    <%= f.input :upvotes %>
+    <%= f.input :downvotes %>
+    <%= f.input :views %>
+    <%= f.input :ratio %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
