@@ -13,7 +13,7 @@ namespace :ingest do
     	gifs = GifutuImport.fetch_gifs()
     	@gifs = Gif.delete_all()
 
-    	gifs.each do |gif|
+    	gifs.first(3).each do |gif|
     		puts gif
     		@gif = Gif.new #first_or_create(image_url: gif["image_url"])
     		@gif.caption = gif["caption"]
@@ -30,6 +30,9 @@ namespace :ingest do
 	  		puts "downvotes " + @gif.downvotes.to_s
 	  		@gif.views = gif["upvotes"].to_i + gif["liked"].to_i + gif["downvotes"].to_i + gif["disliked"].to_i
 	  		puts "views " + @gif.views.to_s
+
+	  		puts "board name" + gif["board_id"]["name"].to_s
+	  		@gif.tag_list = gif["board_id"]["name"]
 
 	  		@gif.description = gif["description"].to_s
 	  		puts "description " + @gif.description.to_s
