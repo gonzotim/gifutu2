@@ -14,18 +14,33 @@ namespace :ingest do
     	@gifs = Gif.delete_all()
 
     	gifs.each do |gif|
-    		
+    		puts gif
     		@gif = Gif.new #first_or_create(image_url: gif["image_url"])
     		@gif.caption = gif["caption"]
     		puts "caption " + @gif.caption
+
+    		@gif.url = gif["image_url"]
+    		puts "url " + @gif.url.to_s
+    	    if @gif.url != ""
+    	    	@gif.avatar_remote_url(@gif.url)	
+    	    end
 	  		@gif.upvotes = gif["upvotes"].to_i + gif["liked"].to_i
 	  		puts "upvotes " + @gif.upvotes.to_s
 	  		@gif.downvotes = gif["downvotes"].to_i + gif["disliked"].to_i
 	  		puts "downvotes " + @gif.downvotes.to_s
 	  		@gif.views = gif["upvotes"].to_i + gif["liked"].to_i + gif["downvotes"].to_i + gif["disliked"].to_i
 	  		puts "views " + @gif.views.to_s
+
+	  		@gif.description = gif["description"].to_s
+	  		puts "description " + @gif.description.to_s
+
+
 	  		if @views != 0 || @gif.downvotes == 0
-	  			@gif.ratio = @gif.upvotes.to_i / ( @gif.upvotes.to_i + @gif.downvotes.to_i + 1)
+
+	  			puts "upvote " + @gif.upvotes.to_i.to_s
+	  			puts "downvote" +  ( @gif.upvotes.to_i + @gif.downvotes.to_i + 1).to_s
+	  			@gif.ratio = @gif.upvotes.to_i / ( @gif.upvotes.to_i + @gif.downvotes.to_i + 1).to_f
+	  			puts "ratio " + @gif.ratio.to_s
 	  			if @gif.save!
 	  				puts @gif.id.to_s + " saved"
 	  			else

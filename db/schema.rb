@@ -15,10 +15,13 @@ ActiveRecord::Schema.define(version: 20131005002938) do
 
   create_table "gifs", force: true do |t|
     t.text     "caption"
+    t.string   "url"
     t.integer  "upvotes"
     t.integer  "downvotes"
     t.integer  "views"
-    t.integer  "ratio"
+    t.float    "ratio"
+    t.text     "avatar_meta"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name"

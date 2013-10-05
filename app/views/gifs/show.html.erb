@@ -8,6 +8,8 @@
 
   <%= image_tag @gif.avatar.url, width: '100' %>
 
+  <%= image_tag @gif.avatar.url(:thumb) %>
+
   <p>
     <strong>Caption:</strong>
     <%= @gif.caption %>
@@ -33,7 +35,7 @@
 
   <p>
     <strong>Ratio:</strong>
-    <%= @gif.ratio %>
+    <%= @gif.ratio.round(2) %>
   </p>
 
 </div>

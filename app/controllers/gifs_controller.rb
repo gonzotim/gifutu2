@@ -25,7 +25,7 @@ class GifsController < ApplicationController
   # POST /gifs.json
   def create
     @gif = Gif.new(gif_params)
-    #@gif = Gif.create(params[:gif])    
+    @gif.avatar_remote_url(@gif.url)
 
     respond_to do |format|
       if @gif.save
@@ -70,7 +70,7 @@ class GifsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gif_params
-      params.require(:gif).permit(:caption, :upvotes, :downvotes, :views, :ratio, :avatar)
+      params.require(:gif).permit(:caption, :upvotes, :downvotes, :views, :ratio, :avatar, :url)
     end
 
 end

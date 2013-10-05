@@ -1,5 +1,6 @@
 class Gif < ActiveRecord::Base
-	has_attached_file :avatar, :styles => { :thumb => "200x200" },
+
+	has_attached_file :avatar, :styles => { :thumb => ["100x100", :jpg] },
     	:default_url => 'missing_image.jpg',
     	:storage => :s3,
 		:s3_credentials => {
@@ -9,5 +10,15 @@ class Gif < ActiveRecord::Base
 		},
     	:path => ":attachment/:id/:style.:extension"
 
-    #attr_accessible :caption, :downvotes, :upvotes, :avatar, :image_url
+	def avatar_remote_url(url_value)
+	    uri = URI(url_value)
+	    path = uri.path 
+	    pathname = Pathname.new(path)
+	    extension = pathname.extname # gif
+	    if ['.jpeg', '.jpg','.png', '.gif'].include? extension
+	      self.avatar = URI.parse(url_value)
+	    	@avatar_remote_url = url_value
+	    end
+	end
+
 end

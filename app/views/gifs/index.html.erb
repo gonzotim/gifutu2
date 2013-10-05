@@ -8,6 +8,7 @@
     <thead>
       <tr>
         <th>Caption</th>
+        <th>Thumbnail</th>        
         <th>Upvotes</th>
         <th>Downvotes</th>
         <th>Views</th>
@@ -22,6 +23,7 @@
       <% @gifs.each do |gif| %>
         <tr>
           <td><%= gif.caption %></td>
+          <td><%= image_tag gif.avatar.url(:thumb) %></td>
           <td><%= gif.upvotes %></td>
           <td><%= gif.downvotes %></td>
           <td><%= gif.views %></td>
