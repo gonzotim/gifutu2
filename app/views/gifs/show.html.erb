@@ -3,21 +3,40 @@
     <%= link_to 'Edit', edit_gif_path(@gif) %> |
     <%= link_to 'Back', gifs_path %>
   </p>
+
+  <%= session[:gifdex] %>
+
   
   <p id="notice"><%= notice %></p>
 
-  <%= image_tag @gif.avatar.url, width: '100' %>
+  <h3><%= @gif.caption %></h3>
+  <%= image_tag @gif.avatar.url %>
+  <br /><br />
+  <p id="next_buttons">
+    <% if @gif.id != session[:gifdex][-1]  %>
 
-  <%= image_tag @gif.avatar.url(:thumb) %>
+        <%= link_to raw("<strong>Next</strong><br />this was awesome"), gif_path(@next_gif, :upvote => "true", :gif_id => @gif.id ), :"data-upvote" => "true", :class => "next_btn btn btn-large btn-success", :style=> "width: 40%; display: inline-block;" %>
 
-  <p>
-    <strong>Caption:</strong>
-    <%= @gif.caption %>
+        <%= link_to raw("<strong>Next</strong><br />this was meh"), gif_path(@next_gif, :upvote => "false", :gif_id => @gif.id), :"data-upvote" => "true", :class => "next_btn btn btn-large btn-warning", :style=> "width: 40%; display: inline-block;" %>
+
+    <% else %>
+      <p>
+        That's all folks.
+        <br />Please help support the site and hit the like button.
+      </p>
+    <% end %>
   </p>
+
+
+  <%#= image_tag @gif.avatar.url, width: '100' %>
+
+  <%#= image_tag @gif.avatar.url(:thumb) %>
+
+
 
 </div>
 
-<div class="col-md-3">
+<div class="col-md-3" style="display:none;">
   <p>
     <strong>Upvotes:</strong>
     <%= @gif.upvotes %>

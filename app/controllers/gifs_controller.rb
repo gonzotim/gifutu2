@@ -4,17 +4,40 @@ class GifsController < ApplicationController
   # GET /gifs
   # GET /gifs.json
   def index
+
     if params[:tag]
       puts "TAG IS " + params[:tag]
-      @gifs = Gif.tagged_with(params[:tag])
+      puts "PARMAS ARE " + params[:sort].to_s
+      if params[:sort] == "most_recent"
+        @gifs = Gif.tagged_with(params[:tag]).order("created_at DESC")
+      else
+        @gifs = Gif.tagged_with(params[:tag]).order("ratio DESC")
+      end
     else
       @gifs = Gif.all
     end
+
+    @gifdex = @gifs.map{|gif| gif.id}
+    session[:gifdex] = @gifdex
+    session[:position] = 0
+    session[:tag] = params[:tag]
+
+
+    @gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[0]
+    @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]
+
+    render "show"
   end
+
 
   # GET /gifs/1
   # GET /gifs/1.json
   def show
+    @gifdex = session[:gifdex]
+    session[:position] = session[:gifdex].index(@gif.id)
+
+    @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]
+
   end
 
   # GET /gifs/new
