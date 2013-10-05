@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20131005180710) do
     t.float    "ratio"
     t.text     "avatar_meta"
     t.text     "description"
+    t.boolean  "approved"
+    t.boolean  "deleted"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name"

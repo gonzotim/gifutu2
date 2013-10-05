@@ -12,4 +12,27 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def display_nav_link(tag)
+    puts params[:action]
+    puts params[:tag]
+
+    label = tag.downcase
+    if params[:action] == "index" && params[:tag].downcase  == tag.downcase
+      html = <<-HTML
+        <li class="active"><a href="/tags/#{label}">#{tag}</a></li>
+      HTML
+
+    else
+      html = <<-HTML
+        <li ><a href="/tags/#{label}">#{tag}</a></li>
+      HTML
+        
+
+    end
+
+
+    html.html_safe
+  end
+
 end
+

@@ -9,6 +9,8 @@ class CreateGifs < ActiveRecord::Migration
       t.float :ratio
       t.text :avatar_meta
       t.text :description
+      t.boolean :approved
+      t.boolean :deleted
 
 
 

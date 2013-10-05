@@ -13,7 +13,7 @@ namespace :ingest do
     	gifs = GifutuImport.fetch_gifs()
     	@gifs = Gif.delete_all()
 
-    	gifs.first(3).each do |gif|
+    	gifs.each do |gif|
     		puts gif
     		@gif = Gif.new #first_or_create(image_url: gif["image_url"])
     		@gif.caption = gif["caption"]

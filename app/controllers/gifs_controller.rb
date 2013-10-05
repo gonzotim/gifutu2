@@ -5,11 +5,11 @@ class GifsController < ApplicationController
   # GET /gifs.json
   def index
     if params[:tag]
+      puts "TAG IS " + params[:tag]
       @gifs = Gif.tagged_with(params[:tag])
     else
       @gifs = Gif.all
     end
-    @gifs = Gif.all
   end
 
   # GET /gifs/1
