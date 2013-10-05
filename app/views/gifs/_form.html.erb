@@ -1,15 +1,11 @@
-<%= simple_form_for(@gif) do |f| %>
+<%= simple_form_for @gif, html: { class: "form-horizontal", :multipart => true } do |f| %>
   <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :caption %>
-    <%= f.input :upvotes %>
-    <%= f.input :downvotes %>
-    <%= f.input :views %>
-    <%= f.input :ratio %>
-  </div>
-
+  <%= f.input :caption, :class=>"btn" %>
+  <br /><br />
+  <label>Click the Browse button to upload a gif from your computer</label>
+  <%= f.file_field :avatar %>
+  <br /><br />
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class=>"btn" %>
   </div>
 <% end %>

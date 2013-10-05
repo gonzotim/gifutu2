@@ -1,29 +1,42 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-6 col-md-offset-3">
+  <p class="text-right">
+    <%= link_to 'Edit', edit_gif_path(@gif) %> |
+    <%= link_to 'Back', gifs_path %>
+  </p>
+  
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Caption:</strong>
-  <%= @gif.caption %>
-</p>
+  <%= image_tag @gif.avatar.url, width: '100' %>
 
-<p>
-  <strong>Upvotes:</strong>
-  <%= @gif.upvotes %>
-</p>
+  <p>
+    <strong>Caption:</strong>
+    <%= @gif.caption %>
+  </p>
 
-<p>
-  <strong>Downvotes:</strong>
-  <%= @gif.downvotes %>
-</p>
+</div>
 
-<p>
-  <strong>Views:</strong>
-  <%= @gif.views %>
-</p>
+<div class="col-md-3">
+  <p>
+    <strong>Upvotes:</strong>
+    <%= @gif.upvotes %>
+  </p>
 
-<p>
-  <strong>Ratio:</strong>
-  <%= @gif.ratio %>
-</p>
+  <p>
+    <strong>Downvotes:</strong>
+    <%= @gif.downvotes %>
+  </p>
 
-<%= link_to 'Edit', edit_gif_path(@gif) %> |
-<%= link_to 'Back', gifs_path %>
+  <p>
+    <strong>Views:</strong>
+    <%= @gif.views %>
+  </p>
+
+  <p>
+    <strong>Ratio:</strong>
+    <%= @gif.ratio %>
+  </p>
+
+</div>
+
+
+

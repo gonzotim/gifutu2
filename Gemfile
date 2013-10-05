@@ -16,6 +16,11 @@ gem 'rolify'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'thin'
 gem 'anjlab-bootstrap-rails', '>= 3.0.0.0.2', :require => 'bootstrap-rails'
+gem "paperclip", "~> 3.0"
+gem 'paperclip-meta'
+gem 'aws-s3'
+gem 'aws-sdk', '~> 1.3.4'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
