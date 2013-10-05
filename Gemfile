@@ -21,6 +21,7 @@ gem 'paperclip-meta'
 gem 'aws-s3'
 gem 'aws-sdk', '~> 1.3.4'
 gem 'httparty'
+gem 'acts-as-taggable-on'
 
 group :development do
   gem 'better_errors'

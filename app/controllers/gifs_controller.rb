@@ -4,6 +4,11 @@ class GifsController < ApplicationController
   # GET /gifs
   # GET /gifs.json
   def index
+    if params[:tag]
+      @gifs = Gif.tagged_with(params[:tag])
+    else
+      @gifs = Gif.all
+    end
     @gifs = Gif.all
   end
 
@@ -70,7 +75,7 @@ class GifsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gif_params
-      params.require(:gif).permit(:caption, :upvotes, :downvotes, :views, :ratio, :avatar, :url)
+      params.require(:gif).permit(:caption, :upvotes, :downvotes, :views, :ratio, :avatar, :url, :tag_list)
     end
 
 end

@@ -23,6 +23,11 @@
     <%= @gif.upvotes %>
   </p>
 
+  <p>Tags: <%= @gif.tag_list %></p>
+
+  <p>Tags: <%= raw @gif.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+
+
   <p>
     <strong>Downvotes:</strong>
     <%= @gif.downvotes %>
