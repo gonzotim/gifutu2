@@ -13,8 +13,8 @@ module ApplicationHelper
   end
 
   def display_nav_link(tag)
-    puts params[:action]
-    puts params[:tag]
+    # puts params[:action]
+    # puts params[:tag]
 
     label = tag.downcase
     if params[:action] == "index" && params[:tag]  == tag

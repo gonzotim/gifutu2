@@ -33,6 +33,9 @@ Gifutu2::Application.configure do
       :user_name => ENV["MANDRILL_USERNAME"],
       :password  => ENV["MANDRILL_API_KEY"]
     }
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
   # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 

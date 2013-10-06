@@ -13,9 +13,6 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      
-
-
 
       <%= display_nav_link("Main") %>
       <%= display_nav_link("Funny") %>
@@ -26,9 +23,38 @@
       <%= display_nav_link("Science") %>
       <%= display_nav_link("Nature") %>
 
-
     </ul>
     <ul class="nav navbar-nav navbar-right">
+
+      <%= link_to "Gifutu2", root_path, :class => 'brand' %>
+
+    <% if user_signed_in? %>
+      <li>
+      <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+      </li>
+    <% else %>
+      <li>
+      <%= link_to 'Login', new_user_session_path %>
+      </li>
+    <% end %>
+    <% if user_signed_in? %>
+      <li>
+      <%= link_to 'Edit account', edit_user_registration_path %>
+      </li>
+      <% if current_user.has_role? :admin %>
+        <li>
+        <%= link_to 'Admin', users_path %>
+        </li>
+      <% end %>
+    <% else %>
+      <li>
+      <%= link_to 'Sign up', new_user_registration_path %>
+      </li>
+    <% end %>
+
+
+
+
       <li><a href="#" class="disabled">Sort by </a></li>
 
       <li class="dropdown">
