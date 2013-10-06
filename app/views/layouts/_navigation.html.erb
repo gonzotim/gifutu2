@@ -23,39 +23,6 @@
       <%= display_nav_link("Science") %>
       <%= display_nav_link("Nature") %>
 
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-
-      <%= link_to "Gifutu2", root_path, :class => 'brand' %>
-
-    <% if user_signed_in? %>
-      <li>
-      <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
-      </li>
-    <% else %>
-      <li>
-      <%= link_to 'Login', new_user_session_path %>
-      </li>
-    <% end %>
-    <% if user_signed_in? %>
-      <li>
-      <%= link_to 'Edit account', edit_user_registration_path %>
-      </li>
-      <% if current_user.has_role? :admin %>
-        <li>
-        <%= link_to 'Admin', users_path %>
-        </li>
-      <% end %>
-    <% else %>
-      <li>
-      <%= link_to 'Sign up', new_user_registration_path %>
-      </li>
-    <% end %>
-
-
-
-
-      <li><a href="#" class="disabled">Sort by </a></li>
 
       <li class="dropdown">
         <% if params[:sort] == "most_recent" %>
@@ -63,8 +30,6 @@
         <% else %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Most Popular<b class="caret"></b></a>
         <% end %>
-        <%= session[:tag] %><br /><%= request.path %>
-        <br /><%= params[:sort] %>
         <ul class="dropdown-menu">
           <li>
             <a href="<%= request.path %>/?sort=most_popular">Most popular</a>
@@ -74,6 +39,89 @@
           </li>
         </ul>
       </li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+          <% if user_signed_in? %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+
+          <% else %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">login<b class="caret"></b></a> 
+          <% end %>
+
+
+        
+        <ul class="dropdown-menu">
+          <% if user_signed_in? %>
+            <li>
+            <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+            </li>
+          <% else %>
+            <li>
+            <%= link_to 'Login', new_user_session_path %>
+            </li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li>
+            <%= link_to 'Edit account', edit_user_registration_path %>
+            </li>
+            <% if current_user.has_role? :admin %>
+              <li>
+              <%= link_to 'Admin', users_path %>
+              </li>
+            <% end %>
+          <% else %>
+            <li>
+            <%= link_to 'Sign up', new_user_registration_path %>
+            </li>
+          <% end %>
+
+        </ul>
+      </li>
+  
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
+
+<% if current_user.has_role? :admin %>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to 'Admin', users_path %>
+        </li>
+        <% if params[:action] == "index" && params[:controller] == "gifs" %>
+          <li>
+            <%= link_to 'Edit', edit_gif_path(@gif) %>
+          </li>
+          <li>
+            <%= link_to 'Back', gifs_path %>
+          </li>          
+          
+
+        <% end %>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+
+
+
+        <li><a href="#" class="disabled">Sort by </a></li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+<% end %>
+
