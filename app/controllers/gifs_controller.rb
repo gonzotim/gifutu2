@@ -32,6 +32,12 @@ class GifsController < ApplicationController
     render "show"
   end
 
+  def list
+    @gifs = Gif.all
+
+    render "index"
+  end
+
 
   # GET /gifs/1
   # GET /gifs/1.json
