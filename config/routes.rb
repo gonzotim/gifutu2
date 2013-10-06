@@ -1,6 +1,16 @@
 Gifutu2::Application.routes.draw do
   get '/list' => 'gifs#list'
-  resources :gifs
+  get '/unapproved' => 'gifs#unapproved'
+  #get 'gifs/:id/approve', to: 'gifs#approve'
+  resources :gifs do
+  	member do
+    	get 'approve'
+    	get 'reject'
+    	get 'delete'
+    	get 'undelete'
+  	end
+  end
+
 
   get 'tags/:tag', to: 'gifs#index', as: :tag
 

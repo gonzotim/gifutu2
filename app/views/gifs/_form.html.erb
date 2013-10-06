@@ -2,20 +2,17 @@
   <%= f.error_notification %>
   
   <%= f.input :caption%>
-  <br /><br />
-
+  <br />
   <%= f.input :url%>
+  <br />
+  <%= f.input :tag_list %>
   <br /><br />
 
-  <%= f.text_field :tag_list %>
-  <br /><br />
 
 
 
-
-  <label>Click the Browse button to upload a gif from your computer</label>
-  <%= f.file_field :avatar %>
-  <br /><br />
+<!--   <label>Click the Browse button to upload a gif from your computer</label>
+  <%= f.file_field :avatar %> -->
   <div class="form-actions">
     <%= f.button :submit, :class=>"btn" %>
   </div>

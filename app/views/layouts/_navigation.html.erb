@@ -97,32 +97,86 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-      <ul class="nav navbar-nav">
+
+
+
+
+
+        <% if (params[:action] == "index" || params[:action] == "show" || params[:action] == "unapproved")  && params[:controller] == "gifs" %>
+          <% if @gif.approved == true %>
+            <ul class="nav navbar-nav">
+              <div>
+                <%= link_to "Approved", reject_gif_path(@gif), :class=>"btn btn-success navbar-btn" %>
+              </div>
+            </ul>
+
+          <% else %>
+            <ul class="nav navbar-nav">
+              <div>
+                <%= link_to "Approve", approve_gif_path(@gif), :class=>"btn btn-primary navbar-btn" %>
+              </div>
+            </ul>          
+          <% end %>
+          <ul class="nav navbar-nav">
+            <p class="navbar-text"></p>
+          </ul>
+          <% if @gif.deleted == true %>
+            <ul class="nav navbar-nav">
+              <div>
+                <%= link_to "Deleted", undelete_gif_path(@gif), :class=>"btn btn-danger navbar-btn" %>
+              </div>
+            </ul>
+          <% else %>
+            <ul class="nav navbar-nav">
+              <div>
+                <%= link_to "Delete", delete_gif_path(@gif), :class=>"btn btn-primary navbar-btn" %>
+              </div>
+            </ul>
+          <% end %>
+
+          
+          <ul class="nav navbar-nav">
+            <p class="navbar-text"></p>
+          </ul>
+          <ul class="nav navbar-nav">
+            <div>
+              <%= link_to "Next", gif_path(@next_gif), :class=>"btn btn-primary navbar-btn" %>
+            </div>
+          </ul>
+
+          <ul class="nav navbar-nav">
+            <p class="navbar-text"></p>
+          </ul>
+          <ul class="nav navbar-nav">  
+            <p class="navbar-text">Tags: <%= raw @gif.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p> 
+          </ul>
+          <ul class="nav navbar-nav">
+            <li>
+              <%= link_to 'Edit', edit_gif_path(@gif) %>
+            </li>
+            <li>
+              <%= link_to 'Back', gifs_path %>
+            </li>
+          </ul>      
+        <% end %>
+
+      <ul class="nav navbar-nav navbar-right">
         <li>
           <%= link_to 'Gif List', "/list" %>
         </li>
+
+        <li>
+          <%= link_to 'Unapproved Gifs', "/unapproved" %>
+        </li>
+
+
         <li>
           <%= link_to 'Admin', users_path %>
         </li>
-        <% if params[:action] == "index" && params[:controller] == "gifs" %>
-          <li>
-            <%= link_to 'Edit', edit_gif_path(@gif) %>
-          </li>
-          <li>
-            <%= link_to 'Back', gifs_path %>
-          </li>          
-          
-
-        <% end %>
-
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
 
 
 
 
-        <li><a href="#" class="disabled">Sort by </a></li>
 
       </ul>
     </div><!-- /.navbar-collapse -->

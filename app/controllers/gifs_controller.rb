@@ -38,6 +38,50 @@ class GifsController < ApplicationController
     render "index"
   end
 
+  def unapproved
+    @gifs = Gif.where("approved = ? AND deleted = ?", false, false)
+
+    puts "ZZzzzzzZZZZZZZZ"
+    puts @gifs.count.to_s
+
+    @gifdex = @gifs.map{|gif| gif.id}
+    session[:gifdex] = @gifdex
+    session[:position] = 0
+
+    @gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[0]
+    @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]
+
+
+    render "show"
+  end
+
+  def approve
+    @gif = Gif.find(params[:id])
+    @gif.approved = true
+    @gif.save
+    redirect_to @gif
+  end
+
+  def reject
+    @gif = Gif.find(params[:id])
+    @gif.approved = false
+    @gif.save
+    redirect_to @gif
+  end
+
+  def delete
+    @gif = Gif.find(params[:id])
+    @gif.deleted = true
+    @gif.save
+    redirect_to @gif
+  end
+
+  def undelete
+    @gif = Gif.find(params[:id])
+    @gif.deleted = false
+    @gif.save
+    redirect_to @gif
+  end
 
   # GET /gifs/1
   # GET /gifs/1.json

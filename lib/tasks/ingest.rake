@@ -9,6 +9,16 @@ namespace :ingest do
 		end
 	end
 
+	task :initalize_gifs => :environment do
+		puts "intializing gifs"
+		@gifs = Gif.all
+		@gifs.each do |gif|
+			gif.approved = false
+			gif.deleted = false
+			gif.save
+		end
+	end
+
 	task :fetch_gifs => :environment do
     	gifs = GifutuImport.fetch_gifs()
     	@gifs = Gif.delete_all()
