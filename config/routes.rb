@@ -14,7 +14,7 @@ Gifutu2::Application.routes.draw do
 
   get 'tags/:tag', to: 'gifs#index', as: :tag
 
-  root :to => "home#index"
+  root :to => "gifs#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users
 end
