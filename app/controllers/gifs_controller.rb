@@ -20,8 +20,11 @@ class GifsController < ApplicationController
     @gifdex = @gifs.map{|gif| gif.id}
     session[:gifdex] = @gifdex
     session[:position] = 0
-    session[:tag] = params[:tag]
-
+    if params[:tag]
+    
+    else
+      session[:tag] = params[:tag]
+    end
 
     @gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[0]
     @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]

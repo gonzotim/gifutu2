@@ -17,7 +17,7 @@ module ApplicationHelper
     puts params[:tag]
 
     label = tag.downcase
-    if params[:action] == "index" && params[:tag].downcase  == tag.downcase
+    if params[:action] == "index" && params[:tag]  == tag
       html = <<-HTML
         <li class="active"><a href="/tags/#{label}">#{tag}</a></li>
       HTML
