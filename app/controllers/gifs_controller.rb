@@ -56,6 +56,7 @@ class GifsController < ApplicationController
   end
 
   def approve
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @gif = Gif.find(params[:id])
     @gif.approved = true
     @gif.save
@@ -63,6 +64,7 @@ class GifsController < ApplicationController
   end
 
   def reject
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @gif = Gif.find(params[:id])
     @gif.approved = false
     @gif.save
@@ -70,6 +72,7 @@ class GifsController < ApplicationController
   end
 
   def delete
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @gif = Gif.find(params[:id])
     @gif.deleted = true
     @gif.save
@@ -77,6 +80,7 @@ class GifsController < ApplicationController
   end
 
   def undelete
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @gif = Gif.find(params[:id])
     @gif.deleted = false
     @gif.save
@@ -100,6 +104,7 @@ class GifsController < ApplicationController
 
   # GET /gifs/1/edit
   def edit
+    authorize! :edit, @user, :message => 'Not authorized as an administrator.'
   end
 
   # POST /gifs
@@ -122,6 +127,7 @@ class GifsController < ApplicationController
   # PATCH/PUT /gifs/1
   # PATCH/PUT /gifs/1.json
   def update
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     respond_to do |format|
       if @gif.update(gif_params)
         format.html { redirect_to @gif, notice: 'Gif was successfully updated.' }
@@ -136,6 +142,7 @@ class GifsController < ApplicationController
   # DELETE /gifs/1
   # DELETE /gifs/1.json
   def destroy
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @gif.destroy
     respond_to do |format|
       format.html { redirect_to gifs_url }
