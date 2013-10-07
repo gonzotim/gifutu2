@@ -1,5 +1,7 @@
-<% flash.each do |name, msg| %>
-  <% if msg.is_a?(String) %>
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-  <% end %>
-<% end %>
+<div class="col-md-6 col-md-offset-3" style="margin-top: 40px">
+	<% flash.each do |name, msg| %>
+	  <% if msg.is_a?(String) %>
+	    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+	  <% end %>
+	<% end %>
+</div>
