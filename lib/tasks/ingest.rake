@@ -47,6 +47,9 @@ namespace :ingest do
 	  		@gif.description = gif["description"].to_s
 	  		puts "description " + @gif.description.to_s
 
+	  		@gif.approved = false
+			@gif.deleted = false
+
 
 	  		if @views != 0 || @gif.downvotes == 0
 

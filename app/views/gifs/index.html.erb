@@ -1,5 +1,14 @@
 <div class="col-md-12">
   <p class="text-right"><%= link_to 'New Gif', new_gif_path %></p>
+
+  <legend>Tags <%= @taglist.count %></legend>
+  <ul>
+    <% Gif.tag_counts.each do |tag| %>
+      <li><%= link_to tag.name + " (" + tag.count.to_s + ")", tag_path(tag.name) %></li>
+    <% end %>
+  </ul>
+ 
+  <p><%#= raw @tagslist.map { |t| link_to t, tag_path(t.name) }.join(', ') %></p> 
   
 
   <legend>Listing gifs <%= @gifs.count %></legend>

@@ -34,7 +34,10 @@ class GifsController < ApplicationController
 
   def list
     @gifs = Gif.all
+    @taglist = ActsAsTaggableOn::Tag.all
+    @tags = Gif.tag_counts_on(:tags)
 
+    puts @taglist.count
     render "index"
   end
 
@@ -85,6 +88,10 @@ class GifsController < ApplicationController
     @gif.deleted = false
     @gif.save
     redirect_to @gif
+  end
+
+  def taglist
+
   end
 
   # GET /gifs/1
