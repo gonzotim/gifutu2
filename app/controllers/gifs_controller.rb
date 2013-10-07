@@ -9,12 +9,12 @@ class GifsController < ApplicationController
       puts "TAG IS " + params[:tag]
       puts "PARMAS ARE " + params[:sort].to_s
       if params[:sort] == "most_recent"
-        @gifs = Gif.tagged_with(params[:tag]).order("created_at DESC")
+        @gifs = Gif.tagged_with(params[:tag]).where("approved = ? AND deleted = ?", true, false).order("created_at DESC")
       else
-        @gifs = Gif.tagged_with(params[:tag]).order("ratio DESC")
+        @gifs = Gif.tagged_with(params[:tag]).where("approved = ? AND deleted = ?", true, false).order("ratio DESC")
       end
     else
-      @gifs = Gif.all
+      @gifs = Gif.where("approved = ? AND deleted = ?", true, false)
     end
 
     @gifdex = @gifs.map{|gif| gif.id}
