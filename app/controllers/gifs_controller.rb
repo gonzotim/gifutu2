@@ -4,12 +4,6 @@ class GifsController < ApplicationController
   # GET /gifs
   # GET /gifs.json
   def index
-    puts "create the admin"
-    user = User.find(1)
-    user.add_role :admin # sets a global role
-    puts user.has_role? :admin
-    user.save
-
 
     if params[:tag]
       puts "TAG IS " + params[:tag]
