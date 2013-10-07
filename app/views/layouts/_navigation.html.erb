@@ -83,7 +83,17 @@
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
+<% if current_user %>
+  CURRENT USER
+  <% if current_user.has_role? :admin %>
+    AND IS ADMIN
+  <% else %>
+    NOT ADMIN
+  <% end %>
 
+<% else %>
+    NOT USER
+<% end %>
 <% if current_user && (current_user.has_role? :admin) %>
   <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
