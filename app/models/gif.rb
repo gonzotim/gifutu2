@@ -2,7 +2,7 @@ class Gif < ActiveRecord::Base
 	acts_as_taggable
 	rolify
 
-	has_attached_file :avatar, :styles => { :thumb => ["100x100", :jpg] },
+	has_attached_file :avatar, :styles => { :thumb => ["100x100", :jpg], :facebook => ["90x90", :jpg] },
     	:default_url => 'missing_image.jpg',
     	:storage => :s3,
 		:s3_credentials => {
