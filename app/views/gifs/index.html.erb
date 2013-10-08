@@ -45,7 +45,7 @@
           <td><%= gif.downvotes %></td>
           <td><%= gif.views %></td>
           <td>
-            <% if @gif.ratio %>
+            <% if gif.ratio %>
               <%= gif.ratio.round(2) %>
             <% end %>
           </td>
