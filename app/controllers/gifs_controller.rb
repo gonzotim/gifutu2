@@ -97,9 +97,7 @@ class GifsController < ApplicationController
   def show
     @gifdex = session[:gifdex]
     session[:position] = session[:gifdex].index(@gif.id)
-
     @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]
-
   end
 
   # GET /gifs/new
@@ -168,14 +166,16 @@ class GifsController < ApplicationController
     end
 
     def check_gifdex
-      puts "check_gifdex"
       if session[:position] == nil
-        session[:position] = -1
+        session[:position] = 0
       end
       if session[:gifdex] == nil
         @gifs = Gif.where("approved = ? AND deleted = ?", true, false)
         @gifdex = @gifs.map{|gif| gif.id}
         session[:gifdex] = @gifdex
+      end
+      if !session[:gifdex].include?(@gif.id)
+        session[:gifdex].unshift(@gif.id)
       end
     end
 

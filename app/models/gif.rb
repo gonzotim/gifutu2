@@ -27,8 +27,6 @@ class Gif < ActiveRecord::Base
 	end
 
 	def self.fetch_gif_and_next(gifdex, position)
-		puts "gifdex: " + gifdex.to_s
-		puts "position: " + position.to_s
 		if !defined?(position)
 			#puts "defined"
 			position = 0
