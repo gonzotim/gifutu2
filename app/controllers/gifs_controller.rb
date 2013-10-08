@@ -115,6 +115,8 @@ class GifsController < ApplicationController
   def create
     @gif = Gif.new(gif_params)
     @gif.avatar_remote_url(@gif.url)
+    @gif.approved = nil
+    @gif.deleted = nil
 
     respond_to do |format|
       if @gif.save
