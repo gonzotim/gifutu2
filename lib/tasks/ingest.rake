@@ -21,18 +21,23 @@ namespace :ingest do
 
 	task :reddit => :environment do
 		puts "Ingest: Reddit"
-		api_response = Gif.fetch_gif_from_reddit("hot", "day", 3)
+		api_response = Gif.fetch_gif_from_reddit("hot", "day", 6)
 		#puts api_response
 		@saved_counter = 0
+		@failed_counter = 0
 		api_response["data"]["children"].each do |result|
 			#puts result
 			puts result["data"]["url"].to_s
 			gif = Gif.new
 			gif.caption = result["data"]["title"]
-			#puts "caption " + gif.caption
+			puts "caption " + gif.caption
 			gif.approved = false
 			gif.deleted = false
 			gif.url = result["data"]["url"]
+			
+			puts "gif " + Gif.where("url = ?", gif.url).count.to_s
+			next if Gif.where("url = ?", gif.url).count != 0
+
 
 			if gif.url.include? ("http://imgur.com/")
 				imgur_ref = gif.url
@@ -44,7 +49,7 @@ namespace :ingest do
 			gif.avatar_remote_url(gif.url)
 
 			if gif.save
-				puts "image #{gif.id.to_s} saved. url is #{gif.url}"
+				puts "image #{gif.id.to_s} saved."
 				@saved = true
 				@saved_counter = @saved_counter + 1
 			else
@@ -58,6 +63,10 @@ namespace :ingest do
 
 
 		end
+
+		puts @saved_counter.to_s + " saved gifs"
+		puts @failed_counter.to_s + " failed gifs"
+
 	end
 
 	task :fetch_gifs => :environment do
