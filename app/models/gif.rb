@@ -2,10 +2,7 @@ class Gif < ActiveRecord::Base
 	acts_as_taggable
 	rolify
 
-	include HTTParty
-  	base_uri 'reddit.com'
-
-	has_attached_file :avatar, :styles => { :thumb => ["100x100", :jpg], :facebook => ["90x90", :jpg] },
+  	has_attached_file :avatar, :styles => { :thumb => ["100x100", :jpg], :facebook => ["90x90", :jpg] },
     	:default_url => 'missing_image.jpg',
     	:storage => :s3,
 		:s3_credentials => {
@@ -14,6 +11,9 @@ class Gif < ActiveRecord::Base
 			:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
 		},
     	:path => ":attachment/:id/:style.:extension"
+
+  	validates :url, presence: true
+  	validates_attachment_content_type :avatar, :content_type => ['image/gif']
 
 	def avatar_remote_url(url_value)
 	    uri = URI(url_value)
@@ -42,10 +42,7 @@ class Gif < ActiveRecord::Base
     	return [@gif,@next_gif]
 	end
 
-	def self.fetch_gif_from_reddit(sort, t, limit)
-		response = get("/r/gifs/search/.json?sort=#{sort}&restrict_sr=on&t=#{t}&limit=#{limit}")
-		return response
-	end
+
 
 
 end
