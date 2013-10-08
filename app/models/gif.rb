@@ -2,6 +2,9 @@ class Gif < ActiveRecord::Base
 	acts_as_taggable
 	rolify
 
+	include HTTParty
+  	base_uri 'reddit.com'
+
 	has_attached_file :avatar, :styles => { :thumb => ["100x100", :jpg], :facebook => ["90x90", :jpg] },
     	:default_url => 'missing_image.jpg',
     	:storage => :s3,
@@ -24,9 +27,9 @@ class Gif < ActiveRecord::Base
 	end
 
 	def self.fetch_gif_and_next(gifdex, position)
-		#puts "gifdex: " + gifdex.to_s
-		#puts "position: " + position.to_s
-		if !defined?(string)
+		puts "gifdex: " + gifdex.to_s
+		puts "position: " + position.to_s
+		if !defined?(position)
 			#puts "defined"
 			position = 0
 		end
@@ -38,5 +41,11 @@ class Gif < ActiveRecord::Base
     	end
     	return [@gif,@next_gif]
 	end
+
+	def self.fetch_gif_from_reddit(sort, t, limit)
+		response = get("/r/gifs/search/.json?sort=#{sort}&restrict_sr=on&t=#{t}&limit=#{limit}")
+		return response
+	end
+
 
 end

@@ -44,16 +44,20 @@ class GifsController < ApplicationController
 
   def unapproved
     @gifs = Gif.where("approved = ? AND deleted = ?", false, false)
+    if @gifs.count != 0
+      @gifdex = @gifs.map{|gif| gif.id}
+      session[:gifdex] = @gifdex
+      session[:position] = 0
 
-    @gifdex = @gifs.map{|gif| gif.id}
-    session[:gifdex] = @gifdex
-    session[:position] = 0
+      @gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[0]
+      @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]
+      
+      render "show"
+    else
+      render "layouts/missing_page"
+    end
 
-    @gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[0]
-    @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]
-
-
-    render "show"
+    
   end
 
   def approve
@@ -86,10 +90,6 @@ class GifsController < ApplicationController
     @gif.deleted = false
     @gif.save
     redirect_to @gif
-  end
-
-  def taglist
-
   end
 
   # GET /gifs/1
@@ -167,6 +167,7 @@ class GifsController < ApplicationController
     end
 
     def check_gifdex
+      puts "check_gifdex"
       if session[:position] == nil
         session[:position] = -1
       end

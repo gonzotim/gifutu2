@@ -1,5 +1,5 @@
 namespace :ingest do
-	puts ".populate 0.1"
+	ActiveSupport::Deprecation.silenced = true
 
 	task :index => :environment do
 		puts "running set_populate_iteration"
@@ -13,9 +13,50 @@ namespace :ingest do
 		puts "intializing gifs"
 		@gifs = Gif.all
 		@gifs.each do |gif|
-			gif.approved = false
+			gif.approved = true
 			gif.deleted = false
 			gif.save
+		end
+	end
+
+	task :reddit => :environment do
+		puts "Ingest: Reddit"
+		api_response = Gif.fetch_gif_from_reddit("hot", "day", 3)
+		#puts api_response
+		@saved_counter = 0
+		api_response["data"]["children"].each do |result|
+			#puts result
+			puts result["data"]["url"].to_s
+			gif = Gif.new
+			gif.caption = result["data"]["title"]
+			#puts "caption " + gif.caption
+			gif.approved = false
+			gif.deleted = false
+			gif.url = result["data"]["url"]
+
+			if gif.url.include? ("http://imgur.com/")
+				imgur_ref = gif.url
+				imgur_ref.slice! "http://imgur.com/"
+				puts "image is an imgur page. Ref: #{imgur_ref} "
+				gif.url = "http://i.imgur.com/" + imgur_ref + ".jpg"
+			end
+
+			gif.avatar_remote_url(gif.url)
+
+			if gif.save
+				puts "image #{gif.id.to_s} saved. url is #{gif.url}"
+				@saved = true
+				@saved_counter = @saved_counter + 1
+			else
+				puts "image #{gif.id.to_s} failed. url is #{gif.url}"
+				@image.errors.full_messages.each do |msg|
+	    			puts "message #{msg}"
+				end
+				@saved = false
+				@failed_counter = @failed_counter + 1
+			end
+
+
 		end
 	end
 
