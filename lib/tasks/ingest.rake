@@ -54,7 +54,7 @@ namespace :ingest do
 				@saved_counter = @saved_counter + 1
 			else
 				puts "image #{gif.id.to_s} failed. url is #{gif.url}"
-				@image.errors.full_messages.each do |msg|
+				@gif.errors.full_messages.each do |msg|
 	    			puts "message #{msg}"
 				end
 				@saved = false
