@@ -21,7 +21,7 @@ namespace :ingest do
 
 	task :reddit => :environment do
 		puts "Ingest: Reddit"
-		api_response = Gif.fetch_gif_from_reddit("hot", "day", 6)
+		api_response = Gif.fetch_gif_from_reddit("hot", "day", 20)
 		#puts api_response
 		@saved_counter = 0
 		@failed_counter = 0
@@ -34,7 +34,7 @@ namespace :ingest do
 			gif.approved = false
 			gif.deleted = false
 			gif.url = result["data"]["url"]
-			
+
 			puts "gif " + Gif.where("url = ?", gif.url).count.to_s
 			next if Gif.where("url = ?", gif.url).count != 0
 
