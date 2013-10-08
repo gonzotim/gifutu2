@@ -1,13 +1,14 @@
 class GifsController < ApplicationController
   before_action :set_gif, only: [:show, :edit, :update, :destroy]
+  before_action :check_gifdex, only: [:show]
 
   # GET /gifs
   # GET /gifs.json
   def index
 
     if params[:tag]
-      puts "TAG IS " + params[:tag]
-      puts "PARMAS ARE " + params[:sort].to_s
+      #puts "TAG IS " + params[:tag]
+      #puts "PARMAS ARE " + params[:sort].to_s
       if params[:sort] == "most_recent"
         @gifs = Gif.tagged_with(params[:tag]).where("approved = ? AND deleted = ?", true, false).order("created_at DESC")
       else
@@ -43,9 +44,6 @@ class GifsController < ApplicationController
 
   def unapproved
     @gifs = Gif.where("approved = ? AND deleted = ?", false, false)
-
-    puts "ZZzzzzzZZZZZZZZ"
-    puts @gifs.count.to_s
 
     @gifdex = @gifs.map{|gif| gif.id}
     session[:gifdex] = @gifdex
@@ -166,6 +164,17 @@ class GifsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def gif_params
       params.require(:gif).permit(:caption, :upvotes, :downvotes, :views, :ratio, :avatar, :url, :tag_list)
+    end
+
+    def check_gifdex
+      if session[:position] == nil
+        session[:position] = -1
+      end
+      if session[:gifdex] == nil
+        @gifs = Gif.where("approved = ? AND deleted = ?", true, false)
+        @gifdex = @gifs.map{|gif| gif.id}
+        session[:gifdex] = @gifdex
+      end
     end
 
 end

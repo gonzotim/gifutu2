@@ -44,7 +44,11 @@
           <td><%= gif.upvotes %></td>
           <td><%= gif.downvotes %></td>
           <td><%= gif.views %></td>
-          <td><%= gif.ratio.round(2) %></td>
+          <td>
+            <% if @gif.ratio %>
+              <%= gif.ratio.round(2) %>
+            <% end %>
+          </td>
           <td><%= link_to 'Show', gif %></td>
           <td><%= link_to 'Edit', edit_gif_path(gif) %></td>
           <td><%= link_to 'Destroy', gif, method: :delete, data: { confirm: 'Are you sure?' } %></td>

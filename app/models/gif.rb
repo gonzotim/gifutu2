@@ -24,6 +24,12 @@ class Gif < ActiveRecord::Base
 	end
 
 	def self.fetch_gif_and_next(gifdex, position)
+		#puts "gifdex: " + gifdex.to_s
+		#puts "position: " + position.to_s
+		if !defined?(string)
+			#puts "defined"
+			position = 0
+		end
     	@gif = Gif.find(gifdex[position])
     	if gifdex.length == position + 1
     		@next_gif = nil
