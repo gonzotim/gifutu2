@@ -31,9 +31,9 @@
       <div class="gif_panel gif_button_panel panel-body" style="width: <%= @gif.avatar.width + 30 %>px" >
         <p id="next_buttons">
           <% if @next_gif != nil  %>
-            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Meh"), gif_path(@next_gif, :upvote => "false", :gif_id => @gif.id), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-warning", :style=> "width: 47%; display: inline-block; " %>
+            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Meh"), gif_path(@next_gif, :upvote => "false", :gif_id => @gif.id), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-warning downvote", :style=> "width: 47%; display: inline-block; " %>
 
-            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Awesome"), gif_path(@next_gif, :upvote => "true", :gif_id => @gif.id ), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-success", :style=> "width: 47%; display: inline-block; float: right;" %>
+            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Awesome"), gif_path(@next_gif, :upvote => "true", :gif_id => @gif.id ), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-success upvote", :style=> "width: 47%; display: inline-block; float: right;" %>
 
           <% else %>
             <p>

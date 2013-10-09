@@ -5,10 +5,25 @@
 fb_root = null
 fb_events_bound = false
 
-
 $ ->
   loadFacebookSDK()
   bindFacebookEvents() unless fb_events_bound
+  mix_track("load_page");
+
+$ =>  
+  $("body").delegate "a.upvote", "click", ->
+    mix_track("upvote");
+    mix_track("next");
+  $("body").delegate "a.downvote", "click", ->
+    mix_track("downvote");
+    mix_track("next");
+
+mix_track = (mixpanel_function)->
+  if location.host == "localhost:3000"
+    console.log "no logging locally";
+    mixpanel.track(mixpanel_function);
+  else  
+    mixpanel.track(mixpanel_function);  
 
 bindFacebookEvents = ->
   $(document)
@@ -39,3 +54,5 @@ initializeFacebookSDK = ->
     status    : true
     cookie    : true
     xfbml     : true
+
+   
