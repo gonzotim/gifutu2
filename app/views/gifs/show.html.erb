@@ -13,7 +13,7 @@
   <meta name="keywords" content="<%= @gif.description %>">
 <% end %>
 
-<div class="col-md-6 col-md-offset-3" style="margin-top: 40px">
+<div class="col-md-12">
   
 
 
@@ -21,9 +21,9 @@
     <div class="alert alert-danger">This page has been deleted by the moderator</div>
   <% else %>
     <div class="panel panel-default">
-      <div class="gif_panel  panel-body" style="width: <%= @gif.avatar.width + 30 %>px" >
-        <h3><%= @gif.caption %></h3><br/>
-        <%= image_tag @gif.avatar.url %>
+      <div class="gif_panel  panel-body" style="width: <%= @gif.avatar.width %>px" >
+        <h3 class="caption"><%= @gif.caption %></h3><br/>
+        <%= image_tag @gif.avatar.url%>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="gif_panel gif_panel panel-body" style="width: <%= @gif.avatar.width + 35 %>px" >
+      <div class="gif_panel facebook_panel panel-body" style="width: <%= @gif.avatar.width + 35 %>px" >
         <div class="fb-like" data-href="https://www.facebook.com/pages/Gifutu/345073592295455" data-width="240" data-height="The pixel height of the plugin" data-colorscheme="dark" data-layout="standard" data-action="like" data-show-faces="true" data-send="true"></div>
       </div>
     </div>

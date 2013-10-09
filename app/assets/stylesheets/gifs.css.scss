@@ -2,11 +2,88 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body { padding-top: 30px; }
+
 .gif_panel{
 	margin-left: auto;
 	margin-right: auto;
+	padding: 0px;
 }
 
-.gif_button_panel{
-	min-width: 320px;
+.facebook_panel{
+	margin-top: 10px;
+	backgound-color: red;
+}
+
+.panel-body{
+	max-width: 260px;
+}
+
+img{
+	max-width: 100%;
+}
+
+.next_btn{
+	padding: 10px 0px;
+}
+
+.caption{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+/* Extra small devices (phones, up to 480px) */
+/* No media query since this is the default in Bootstrap */
+
+@media screen and (min-width: 321px){
+	.panel-body{
+		max-width: 270px;
+	}
+	.next_btn{
+		padding: 10px 16px;
+	}
+}
+
+@media screen and (min-width: 450px){
+	.panel-body{
+		max-width: 400px;
+	}
+	.next_btn{
+		padding: 10px 16px;
+	}
+	body { padding-top: 60px; }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	.panel-body{
+		max-width: 650px;
+	}
+	.next_btn{
+		padding: 10px 16px;
+	}
+	body { padding-top: 60px; }
+}
+
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.panel-body{
+		max-width: 800px;
+	}
+	.next_btn{
+		padding: 10px 16px;
+	}
+	body { padding-top: 60px; }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.panel-body{
+		max-width: 1100px;
+	}
+	.next_btn{
+		padding: 10px 16px;
+	}
+	body { padding-top: 60px; }
 }
