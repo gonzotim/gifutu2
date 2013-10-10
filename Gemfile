@@ -25,6 +25,7 @@ gem 'httparty'
 gem 'acts-as-taggable-on'
 gem 'rails_12factor'
 gem 'mandrill-api'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'better_errors'
