@@ -2,6 +2,7 @@ Gifutu2::Application.routes.draw do
   get '/list' => 'gifs#list'
   get '/unapproved' => 'gifs#unapproved'
   get '/taglist' => 'gifs#taglist'
+  get '/boards/:board_id/gifs/:id' => 'gifs#index'
   #get 'gifs/:id/approve', to: 'gifs#approve'
   resources :gifs do
   	member do
