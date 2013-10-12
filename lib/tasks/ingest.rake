@@ -33,6 +33,11 @@ namespace :ingest do
 			puts "caption " + gif.caption
 			gif.approved = false
 			gif.deleted = false
+			gif.upvotes = 0
+			gif.downvotes = 0
+			gif.ratio = 0
+			gif.views = 0
+
 			gif.url = result["data"]["url"]
 
 			puts "gif " + Gif.where("url = ?", gif.url).count.to_s
@@ -93,6 +98,10 @@ namespace :ingest do
 			if gif.downvotes == nil
 				puts "downvotes is null"
 				gif.downvotes = 0
+			end	
+			if gif.views == nil
+				puts "downvotes is null"
+				gif.views = 0
 			end	
 			gif.save
 			puts "gif saved"

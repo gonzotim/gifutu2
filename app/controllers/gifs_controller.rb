@@ -117,6 +117,10 @@ class GifsController < ApplicationController
     @gif.avatar_remote_url(@gif.url)
     @gif.approved = false
     @gif.deleted = false
+    @gif.upvotes = 0
+    @gif.downvotes = 0
+    @gif.ratio = 0
+    @gif.views = 0
 
     respond_to do |format|
       if @gif.save
