@@ -69,6 +69,38 @@ namespace :ingest do
 
 	end
 
+	task :clean_gifs => :environment do
+		@gifs = Gif.all
+		@gifs.each do |gif|
+			puts "---------- * ----------"
+			puts (gif.id.to_s + ", " + gif.caption)
+			if gif.approved == nil
+				puts "approved is null"
+				gif.approved = false
+			end
+			if gif.deleted == nil
+				puts "deleted is null"
+				gif.deleted = false
+			end
+			if gif.ratio == nil
+				puts "ratio is null"
+				gif.ratio = 0
+			end
+			if gif.upvotes == nil
+				puts "upvotes is null"
+				gif.upvotes = 0
+			end			
+			if gif.downvotes == nil
+				puts "downvotes is null"
+				gif.downvotes = 0
+			end	
+			gif.save
+			puts "gif saved"
+			puts ""
+		end
+
+	end
+
 	task :fetch_gifs => :environment do
     	gifs = GifutuImport.fetch_gifs()
     	@gifs = Gif.delete_all()
