@@ -15,7 +15,7 @@ class GifsController < ApplicationController
         @gifs = Gif.tagged_with(params[:tag]).where("approved = ? AND deleted = ?", true, false).order("ratio DESC")
       end
     else
-      @gifs = Gif.where("approved = ? AND deleted = ?", true, false)
+      @gifs = Gif.tagged_with("main").where("approved = ? AND deleted = ?", true, false).order("ratio DESC")
     end
 
     @gifdex = @gifs.map{|gif| gif.id}
