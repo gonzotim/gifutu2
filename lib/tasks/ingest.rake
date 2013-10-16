@@ -9,14 +9,32 @@ namespace :ingest do
 		end
 	end
 
-	task :initalize_gifs => :environment do
-		puts "intializing gifs"
+	task :calcs => :environment do
+		puts "calculate views and ratio"
 		@gifs = Gif.all
 		@gifs.each do |gif|
-			gif.approved = true
-			gif.deleted = false
+			gif.views = gif.upvotes + gif.downvotes
+			gif.ratio  = gif.upvotes.to_i / ( gif.upvotes.to_i + gif.downvotes.to_i + 1).to_f
 			gif.save
 		end
+
+		highest_ratio = Gif.where(ratio: 0.01..1).maximum("ratio")
+		lowest_ratio = Gif.where(ratio: 0.01..1).minimum("ratio")
+
+		@gifs.each do |gif|
+			if gif.ratio != 0
+				puts "ratio " + gif.ratio.to_s
+				puts "highest_ratio  " + highest_ratio.to_s
+				puts "lowest_ratio  " + lowest_ratio.to_s
+				gif.ratio  = ((gif.ratio - lowest_ratio) / (highest_ratio - lowest_ratio)) * 100
+
+				gif.save
+				puts gif.ratio.to_s
+				puts
+			end
+		end
+		puts "most loved gif is " + Gif.all.order("ratio DESC").first.id.to_s
+		puts "most un-loved gif is " + Gif.all.order("ratio DESC").last.id.to_s
 	end
 
 	task :reddit => :environment do

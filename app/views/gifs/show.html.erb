@@ -3,7 +3,8 @@
   <meta property="og:title" content="Click to see this animated gif"/>
   <meta property="og:description" content="Gifutu find the funniest, most intresting and cutest gifs from across the web." id="meta_description"/>
   <meta property="og:site_name" content="gifutu.com"/>
-  <meta property="og:url" content="http://gifutu.com/gifs/<%= @gif.id %>"/>
+  <meta property="og:url" content="http://gifutu.com/gifs/avatars/<%= @gif.id %>"/>
+  http://s3.amazonaws.com/gifutu2/avatars/247/facebook.jpg?1381270807
   <meta property="fb:admins" content="544037526"/>
   <meta property="og:type" content="website"/>
   <meta property="fb:app_id" content="1422747647944239"/>
@@ -31,9 +32,9 @@
       <div class="gif_panel gif_button_panel panel-body" style="width: <%= @gif.avatar.width + 30 %>px" >
         <p id="next_buttons">
           <% if @next_gif != nil  %>
-            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Meh"), gif_path(@next_gif, :upvote => "false", :gif_id => @gif.id), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-warning downvote", :style=> "width: 47%; display: inline-block; " %>
+            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Meh"), gif_path(@next_gif, :v => "false", :gif_id => @gif.id), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-warning downvote", :style=> "width: 47%; display: inline-block; " %>
 
-            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Awesome"), gif_path(@next_gif, :upvote => "true", :gif_id => @gif.id ), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-success upvote", :style=> "width: 47%; display: inline-block; float: right;" %>
+            <%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-right'></span> Awesome"), gif_path(@next_gif, :v => "true", :gif_id => @gif.id ), :"data-upvote" => "true", :class => "next_btn btn btn-lg btn-success upvote", :style=> "width: 47%; display: inline-block; float: right;" %>
 
           <% else %>
             <p>

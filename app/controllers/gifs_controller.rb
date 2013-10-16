@@ -97,6 +97,19 @@ class GifsController < ApplicationController
   def show
     @gifdex = session[:gifdex]
     session[:position] = session[:gifdex].index(@gif.id)
+    if params[:gif_id]
+      @last_gif = Gif.find(params[:gif_id])
+      puts "last_gif "+@last_gif.id.to_s
+      if params[:v] == "true"
+        puts "up vote"
+        @last_gif.upvotes += 1
+      elsif params[:v] == "false"
+        puts "down vote"
+        @last_gif.downvotes += 1
+      end
+      @last_gif.views += 1
+      @last_gif.save
+    end
     @next_gif = Gif.fetch_gif_and_next(session[:gifdex], session[:position])[1]
   end
 
