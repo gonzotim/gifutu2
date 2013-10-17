@@ -17,7 +17,7 @@ namespace :ingest do
 			gif.ratio  = gif.upvotes.to_i / ( gif.upvotes.to_i + gif.downvotes.to_i + 1).to_f
 			gif.save
 			puts "gif " + gif.id.to_s + ", views " + gif.views.to_s + ", ratio " + gif.ratio.to_s
-			
+
 		end
 
 		# highest_ratio = Gif.where(ratio: 0.01..1).maximum("ratio")
@@ -45,6 +45,7 @@ namespace :ingest do
 		#puts api_response
 		@saved_counter = 0
 		@failed_counter = 0
+		average_ratio = Gif.where('ratio != ?', 0).average('ratio')
 		api_response["data"]["children"].each do |result|
 			#puts result
 			puts result["data"]["url"].to_s
@@ -55,7 +56,7 @@ namespace :ingest do
 			gif.deleted = false
 			gif.upvotes = 0
 			gif.downvotes = 0
-			gif.ratio = 0
+			gif.ratio = average_ratio
 			gif.views = 0
 
 			gif.url = result["data"]["url"]
