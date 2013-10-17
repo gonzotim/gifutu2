@@ -15,6 +15,8 @@ class Gif < ActiveRecord::Base
   	validates :url, presence: true
   	validates_attachment_content_type :avatar, :content_type => ['image/gif']
 
+  	default_scope order('id ASC')
+
 	def avatar_remote_url(url_value)
 	    uri = URI(url_value)
 	    path = uri.path 
