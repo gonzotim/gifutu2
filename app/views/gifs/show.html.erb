@@ -1,12 +1,13 @@
 <% content_for :head do %>
-  <meta property="og:image" content="<%= @gif.avatar.url %>" />
+  <meta property="og:image" content="<%= @gif.avatar.url(:facebook) %>" />
   <meta property="og:title" content="Click to see this animated gif"/>
   <meta property="og:description" content="Gifutu find the funniest, most intresting and cutest gifs from across the web." id="meta_description"/>
   <meta property="og:site_name" content="gifutu.com"/>
-  <meta property="og:url" content="http://gifutu.com/gifs/avatars/<%= @gif.id %>"/>
+  <meta property="og:url" content="http://gifutu.com/gifs/<%= @gif.id %>"/>
   <meta property="fb:admins" content="544037526"/>
   <meta property="og:type" content="website"/>
   <meta property="fb:app_id" content="1422747647944239"/>
+
   
   <title>Gifutu - <%= @gif.description %></title>
   <meta name="Description" content="Gifutu - Some Dammend Fine Gifs.  Gifutu recommends the best gifs based on your tastes.">
@@ -42,6 +43,16 @@
             </p>
           <% end %>
         </p>
+        <a href="#" 
+  onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+      'facebook-share-dialog', 
+      'width=626,height=436'); 
+    return false;">
+  Share on Facebook
+</a>
+
       </div>
     </div>
 
