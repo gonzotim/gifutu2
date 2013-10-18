@@ -1,4 +1,4 @@
-namespace :ingest do
+namespace :script do
 	ActiveSupport::Deprecation.silenced = true
 
 	task :index => :environment do
@@ -8,6 +8,14 @@ namespace :ingest do
 			puts (gif.id.to_s + ", " + gif.ratio.to_s)
 		end
 	end
+
+	task :users => :environment do
+		puts "running set_populate_iteration"
+		@users = User.all
+		@users.each do |user|
+			puts (user.id.to_s + ", " + user.email)
+		end
+	end	
 
 	task :calcs => :environment do
 		puts "calculate views and ratio"

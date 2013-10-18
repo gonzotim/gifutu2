@@ -16,6 +16,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Caption</th>
         <th>Thumbnail</th>        
         <th>Upvotes</th>
@@ -30,29 +31,32 @@
 
     <tbody>
       <% @gifs.each do |gif| %>
-        <tr>
-          <td>
-            <%= gif.caption %><br />
-            <% if gif.approved == true %>
-              <span class="text-success">Approved</span>
-            <% else %>
-              <span class="text-danger">Not approved</span>
-            <% end %>
+        <% if gif.deleted == false %>
+          <tr>
+            <td><%= link_to gif.id, gif %></td>
+            <td class="caption">
+              <%= gif.caption %><br />
+              <% if gif.approved == true %>
+                <span class="text-success">Approved</span>
+              <% else %>
+                <span class="text-danger">Not approved</span>
+              <% end %>
 
-          </td>
-          <td><%= image_tag gif.avatar.url(:thumb) %></td>
-          <td><%= gif.upvotes %></td>
-          <td><%= gif.downvotes %></td>
-          <td><%= gif.views %></td>
-          <td>
-            <% if gif.ratio %>
-              <%= gif.ratio.round(2) %>
-            <% end %>
-          </td>
-          <td><%= link_to 'Show', gif %></td>
-          <td><%= link_to 'Edit', edit_gif_path(gif) %></td>
-          <td><%= link_to 'Destroy', gif, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+            </td>
+            <td><%= image_tag gif.avatar.url(:thumb) %></td>
+            <td><%= gif.upvotes %></td>
+            <td><%= gif.downvotes %></td>
+            <td><%= gif.views %></td>
+            <td>
+              <% if gif.ratio %>
+                <%= gif.ratio.round(2) %>
+              <% end %>
+            </td>
+            <td><%= link_to 'Show', gif %></td>
+            <td><%= link_to 'Edit', edit_gif_path(gif) %></td>
+            <td><%= link_to 'Destroy', gif, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
