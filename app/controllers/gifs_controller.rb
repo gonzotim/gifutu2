@@ -34,7 +34,13 @@ class GifsController < ApplicationController
   end
 
   def list
-    @gifs = Gif.all
+
+    if params[:tag]
+      @gifs = Gif.tagged_with(params[:tag]).where("approved = ? AND deleted = ?", true, false).order("ratio DESC")
+    else
+      @gifs = Gif.where("approved = ? AND deleted = ?", true, false)
+    end
+
     @taglist = ActsAsTaggableOn::Tag.all
     @tags = Gif.tag_counts_on(:tags)
 

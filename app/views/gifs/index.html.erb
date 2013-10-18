@@ -2,11 +2,11 @@
   <p class="text-right"><%= link_to 'New Gif', new_gif_path %></p>
 
   <legend>Tags <%= @taglist.count %></legend>
-  <ul>
+  <p>
     <% Gif.tag_counts.each do |tag| %>
-      <li><%= link_to tag.name + " (" + tag.count.to_s + ")", tag_path(tag.name) %></li>
+      <%= link_to tag.name + " (" + tag.count.to_s + ")", tag_list_path(tag.name) %>,&nbsp;&nbsp;&nbsp;
     <% end %>
-  </ul>
+  </p>
  
   <p><%#= raw @tagslist.map { |t| link_to t, tag_path(t.name) }.join(', ') %></p> 
   
