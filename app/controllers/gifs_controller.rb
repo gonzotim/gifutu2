@@ -38,7 +38,7 @@ class GifsController < ApplicationController
     if params[:tag]
       @gifs = Gif.tagged_with(params[:tag]).where("approved = ? AND deleted = ?", true, false).order("ratio DESC")
     else
-      @gifs = Gif.where("approved = ? AND deleted = ?", true, false)
+      @gifs = Gif.where("approved = ? AND deleted = ?", true, false).order("ratio DESC")
     end
 
     @taglist = ActsAsTaggableOn::Tag.all
